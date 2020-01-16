@@ -24,7 +24,7 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['raberin','PCDSandwichMan', 'ethyl2','phil-mac','web25Lucius', 'lyndsiWilliams', 'joshhill15', 'nasraaden', 'KaiHaskell', 'caleballard', 'cstewart94', 'EricFerguson76', 'bseverino', 'leachcoding', 'javish88', 'crutledgedev', 'TheNativeDev', 'ElliotPhipps', 'CoBe18', 'dijahdeen'];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
