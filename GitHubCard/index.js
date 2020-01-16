@@ -45,6 +45,17 @@ const followersArray = ['raberin','PCDSandwichMan', 'ethyl2','phil-mac','web25Lu
 </div>
 
 */
+// const obj = document.querySelector('.cards')
+// followersArray.forEach(info => {
+//   obj.appendChild(createCard(info));
+// })
+   
+    // obj.appendChild(card);
+    // card.append(cardImg, cardInfo, nameH3, user, locate, prof, fans, heroes, ego);
+
+    //Set class names
+  
+  // }
 
 /* List of LS Instructors Github username's: 
   tetondan
@@ -53,3 +64,104 @@ const followersArray = ['raberin','PCDSandwichMan', 'ethyl2','phil-mac','web25Lu
   luishrd
   bigknell
 */
+
+axios
+.get('https://api.github.com/users/Gremlin4544')  //gets the info from the api
+.then((response) => {
+  console.log(response);
+  createCard(response);
+})
+//can also be written .then(response => { console.log(response.data.message)})
+
+
+.catch((err) => {
+  console.log(err);
+});
+//can also be written .catch(error => { console.log("data not returned", error)})
+
+  
+  followersArray.forEach(follower => {
+    axios
+    .get(`https://api.github.com/users/${follower}`)
+    .then((response) => {
+
+    createCard(response);
+
+  })
+})
+
+// imgsrc, name, username, location, profile, followers, following, bio
+
+//Define functional component here
+
+function createCard(item) {
+
+  //Define new elements
+  // instead of wrintg const for multiple variables - you can add a comma to the end of each variable line
+
+  const card = document.createElement('div');
+  const cardImg = document.createElement('img');
+  const cardInfo = document.createElement('div');
+  const nameH3 = document.createElement('h3');
+  const username = document.createElement('p');
+  const location = document.createElement('p');
+  const profile = document.createElement('url');
+  const gHubAddy = document.createElement('a');
+  const followers = document.createElement('p');
+  const following = document.createElement('p');
+  const bio = document.createElement('p');
+
+  //Setup structure of elements
+
+  // card.appendChild(cardImg);
+  // card.appendChild(cardInfo);
+  // cardInfo.appendChild(nameH3);
+  // cardInfo.appendChild(username);
+  // cardInfo.appendChild(location);
+  // cardInfo.appendChild(profile);
+  // profile.appendChild(gHubAddy)
+  // cardInfo.appendChild(followers);
+  // cardInfo.appendChild(following);
+  // cardInfo.appendChild(bio);
+  
+
+
+  //Set class names
+
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+  nameH3.classList.add('name');
+  username.classList.add('username');
+
+  //Set text content
+
+  cardImg.src = item.data.avatar_url;
+  nameH3.textContent = item.data.name;
+  username.textContent = item.data.login;
+  location.textContent = 'Location: ' + item.data.location;
+  profile.textContent = `Profile: `;
+  gHubAddy.setAttribute('href', item.data.html_url);
+  gHubAddy.textContent = item.data.html_url;
+  followers.textContent = 'Followers: ' + item.data.followers;
+  following.textContent = 'Following: ' + item.data.following;
+  bio.textContent = 'Bio: ' + item.data.bio;    
+  console.log(gHubAddy);
+
+   //Setup structure of elements
+
+   card.appendChild(cardImg);
+   card.appendChild(cardInfo);
+   cardInfo.appendChild(nameH3);
+   cardInfo.appendChild(username);
+   cardInfo.appendChild(location);
+   cardInfo.appendChild(profile);
+   profile.appendChild(gHubAddy)
+   cardInfo.appendChild(followers);
+   cardInfo.appendChild(following);
+   cardInfo.appendChild(bio);
+  
+   
+  document.querySelector('.cards').appendChild(card);
+  
+  return card;
+}
